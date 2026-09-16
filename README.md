@@ -53,3 +53,17 @@ go run . -output get-findings.tsv -progress=false
 Taskで実行:
 
 task export-findings-tsv
+
+## グローバルオプション
+
+- `-h`, `--help`: ヘルプを表示
+- `-v`: バージョンを表示して終了
+- `-readme`: README の内容を表示して終了（バイナリに埋め込み済み）
+
+## README の表示
+
+バイナリに埋め込まれた README を表示するには `-readme` フラグを使用します：
+
+```bash
+oreno-sec-posture-report -readme
+```

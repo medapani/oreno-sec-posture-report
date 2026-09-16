@@ -1,6 +1,7 @@
 package main
 
 import (
+	_ "embed"
 	"fmt"
 	"os"
 
@@ -9,11 +10,18 @@ import (
 
 var appVersion = "0.0.0"
 
+//go:embed README.md
+var readmeContent string
+
 func main() {
 	args := os.Args[1:]
 	for _, arg := range args {
 		if arg == "-v" {
 			fmt.Printf("oreno-sec-posture-report version %s\n", appVersion)
+			os.Exit(0)
+		}
+		if arg == "-readme" {
+			fmt.Print(readmeContent)
 			os.Exit(0)
 		}
 	}
@@ -37,7 +45,8 @@ func printHelp() {
 	help := "Usage: oreno-sec-posture-report [options]\n\n" +
 		"Global Options:\n" +
 		"  -h, --help  Show this help\n" +
-		"  -v          Show version\n\n" +
+		"  -v          Show version\n" +
+		"  -readme     Show embedded README.md content\n\n" +
 		"AWS Options:\n" +
 		"  -output string   TSV output file path (default: get-findings.tsv)\n" +
 		"  -profile string  AWS profile name\n" +
@@ -46,6 +55,7 @@ func printHelp() {
 		"Examples:\n" +
 		"  oreno-sec-posture-report -output get-findings.tsv\n" +
 		"  oreno-sec-posture-report -profile dev -region ap-northeast-1\n" +
-		"  oreno-sec-posture-report -progress=false\n"
+		"  oreno-sec-posture-report -progress=false\n" +
+		"  oreno-sec-posture-report -readme\n"
 	fmt.Print(help)
 }
